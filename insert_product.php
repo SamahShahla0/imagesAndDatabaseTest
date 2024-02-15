@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 include 'database.php';
 
 // Connect to the database
@@ -6,7 +8,8 @@ $conn = connectDB();
 
 // Process form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST["name"];
+    if(isset($_POST["name"])) {
+        $name = $_POST["name"];
 
     // Process image file
     if(isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
@@ -27,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error uploading image";
     }
 }
-
+}
 // Close database connection
 $conn->close();
 ?>
