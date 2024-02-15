@@ -28,3 +28,31 @@ function getItems(){
   .catch((error) => console.error("Error fetching items:", error));
 }
 getItems();
+
+/*-------------------------------------------------------------------------------------------------------*/
+const form = document.querySelector("#form");
+form.addEventListener("submit", async function(e){
+  e.preventDefault();
+  const formData = new FormData();
+  const fileField = document.querySelector('#image');
+  console.log('1');
+  console.log(fileField);
+  console.log('2');
+  console.log(fileField.files);
+  console.log('3');
+  console.log(fileField.files[0]);
+  
+  formData.append("name", document.querySelector('#name'));
+  formData.append("image", fileField.files[0]);
+
+  try {
+    const response = await fetch("http://localhost/imagesAndDatabaseTest/insert_product.php", {
+      method: "POST",
+      body: formData,
+    });
+    const result = await response.json();
+    console.log("Success:", result);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+});

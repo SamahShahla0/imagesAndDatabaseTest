@@ -3,17 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Item Gallery</title>
+    <title>Items Gallery</title>
+    <link rel="icon" type="image/x-icon" href="favicon.png" />
     <link rel="stylesheet" href="styles.css" />
-    <script src="myscript.js"></script>
   </head>
   <body>
     <h1>Add item</h1>
-    <form
-      action="insert_product.php"
-      method="post"
-      enctype="multipart/form-data"
-    >
+    <form id="form" action="" method="post" enctype="multipart/form-data">
       <label for="name">item Name:</label><br />
       <input type="text" id="name" name="name" required /><br /><br />
       <label for="image">item Image:</label><br />
@@ -28,9 +24,10 @@
     </form>
     <!--###################################################################################################################-->
 
-    <h1>Item Gallery</h1>
+    <h1>Items Gallery</h1>
     <div id="itemsContainer">
       <!-- Items will be populated here -->
     </div>
+    <script src="myscript.js"></script>
   </body>
 </html>
