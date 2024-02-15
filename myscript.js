@@ -35,15 +35,15 @@ form.addEventListener("submit", async function(e){
   e.preventDefault();
   const formData = new FormData();
   const fileField = document.querySelector('#image');
-  console.log('1');
-  console.log(fileField);
-  console.log('2');
-  console.log(fileField.files);
-  console.log('3');
-  console.log(fileField.files[0]);
-  
-  formData.append("name", document.querySelector('#name'));
+  const thename = document.querySelector('#name');
+  formData.append("name", thename.value);
   formData.append("image", fileField.files[0]);
+
+  /*for (const pair of formData.entries()) {
+    console.log(pair[0], pair[1]);
+    console.log("////////////////////////////")
+    console.log(typeof  pair[1]);
+  }*/
 
   try {
     const response = await fetch("http://localhost/imagesAndDatabaseTest/insert_product.php", {
