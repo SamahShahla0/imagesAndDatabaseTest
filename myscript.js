@@ -1,6 +1,7 @@
-// Fetch items from the server
-function getItems(){
-  fetch("get_items.php")
+const getItems = "get_items.php";
+const getLastItem = "get_last_record.php";
+function getApi(api){
+  fetch(api)
   .then((response) => response.json())
   .then((products) => {
     const itemsContainer = document.getElementById("itemsContainer");
@@ -27,37 +28,11 @@ function getItems(){
   })
   .catch((error) => console.error("Error fetching items:", error));
 }
-getItems();
-
 /*-------------------------------------------------------------------------------------------------------*/
-function getLastItem(){
-  fetch("get_last_record.php")
-  .then((response) => response.json())
-  .then((products) => {
-    const itemsContainer = document.getElementById("itemsContainer");
-    products.forEach((product) => {
-      const itemElement = document.createElement("div");
-      itemElement.classList.add("item");
+// Fetch items from the server
 
-      const imgElement = document.createElement("img");
-      imgElement.src = "data:image/jpeg;base64," + product.image_base64;
-      imgElement.alt = product.name;
+getApi(getItems);
 
-      const h2Element = document.createElement("h2");
-      h2Element.textContent = product.name;
-
-      const pElement = document.createElement("p");
-      pElement.textContent = "Description of " + product.name;
-
-      itemElement.appendChild(imgElement);
-      itemElement.appendChild(h2Element);
-      itemElement.appendChild(pElement);
-
-      itemsContainer.appendChild(itemElement);
-    });
-  })
-  .catch((error) => console.error("Error fetching item:", error));
-}
 /*-------------------------------------------------------------------------------------------------------*/
 const form = document.querySelector("#form");
 form.addEventListener("submit", async function(e){
@@ -75,9 +50,15 @@ form.addEventListener("submit", async function(e){
     });
     const result = await response.json();
     console.log("Success:", result);
+    if(result.success == true){
+      getApi(getLastItem);
+    }
+    else{
+      console.log("notttttttt true");
+    }
   } catch (error) {
     console.error("Error:", error);
   }
-  getLastItem();
 
 });
+
